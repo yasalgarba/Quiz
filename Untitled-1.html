@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="Quiz.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <style>
+        * {
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(226, 181, 125);
+}
+header {
+  background-color: rgb(175, 130, 6);
+}
+li {
+  padding: 5px;
+  background-color: rgba(234, 215, 191, 0.916);
+  list-style: none;
+  display: inline-block;
+  text-align: center;
+  margin: auto 20px 10px;
+  width: 11%;
+  height: 5vh;
+  border-radius: 5px;
+  font-size: large;
+  &:hover {
+    background-color: rgba(177, 148, 112, 0.916);
+    &:active {
+      background-color: rgba(201, 90, 34, 0.916);
+      color: white;
+    }
+  }
+}
+
+#Qst1{
+  width: 100px;
+}
+li:first-child {
+  margin-right: auto;
+}
+.side-Bar {
+  padding: 5px;
+  width: 160px;
+  height: 40vh;
+  top: 4%;
+  margin: 0;
+
+  right: 0;
+  position: fixed;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  display: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 1px 1px 30px 1px rgb(77, 33, 33);
+  border-radius: 5px;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+.side-Bar li {
+  text-align: left;
+  font-weight: bolder;
+  margin: 0;
+  padding: 3px;
+  width: 100%;
+  font-size: larger;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+  &:hover {
+    background-color: rgb(234, 215, 191);
+    margin: 0;
+
+    &:active {
+      background-color: rgba(201, 90, 34, 0.916);
+      color: white;
+    }
+  }
+}
+
+.menu-button {
+  display: none;
+}
+
+ul {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.quiz-container {
+  background-color: rgb(234, 215, 191);
+  max-width: 60%;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin: 50px auto 13px;
+  gap: 15px;
+  border: solid rgb(175, 130, 6) 3px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 30px 1px rgb(77, 33, 33);
+}
+.scoreArea{
+  background-color: rgb(234, 215, 191);
+  max-width: 100%;
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin: 50px auto 13px;
+  border-radius: 5px;
+  font-size: xx-large;
+  font-weight: bolder;
+    font-style: initial;
+  font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+}
+p {
+  color: white;
+  font-weight: bolder;
+}
+h2,
+h3,
+p{
+  text-align: center;
+  font-size: x-large;
+  font-style: initial;
+  font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+}
+
+hr {
+  background-color: rgb(175, 130, 6);
+  padding: 1px;
+}
+
+.btn{
+  text-align: left;
+  width: 90%;
+  height: 5vh;
+  background-color: azure;
+  border: 1px solid rgb(129, 118, 118);
+  margin: 10px 15px 8px;
+  margin-block-start: 20px;
+  border-radius: 3px;
+  font-size: larger;
+  font-weight: 600;
+  border-left: rgb(175, 130, 6) solid 10px;
+  font-family: "Times New Roman", Times, serif;
+  &:hover {
+    background-color: rgba(177, 148, 112, 0.916);
+    &:active {
+      background-color: rgba(201, 90, 34, 0.916);
+      color: white;
+    }
+  }
+}
+.btn:hover:not([disabled]) {
+  background-color: #e0e0e0;
+  transform: scale(1.02);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.btn.correct {
+  background-color: #4caf50; /* Green */
+  color: #fff;
+  border-color: #45a049;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  background-image: url('check_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png');
+  background-position: 95%;
+  background-repeat: no-repeat;
+}
+
+.btn.incorrect {
+  background-color: #f44336; /* Red */
+  color: #fff;
+  border-color: rgb(255, 0, 0);
+  box-shadow: 0 0 5px rgba(244, 67, 54, 0.5);
+  background-image: url('close_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png');
+  background-position: 95%;
+  background-repeat: no-repeat;
+}
+
+
+.NxtBtn, .restartBtn{
+  background-color: rgb(175, 130, 6);
+  border-radius: 5px;
+  padding: 10px;
+ position: absolute;
+  left: 50%;
+  top: 73%;
+  translate: -50% -50%;
+  width: auto;
+  color: white;
+  font-weight: bold;
+  font-size: large;
+  border: none;
+  
+  &:hover {
+    background-color: rgba(226, 180, 125, 0.916);
+    color: black;
+    border: solid black 1px;
+    &:active {
+      background-color: rgba(249, 249, 249, 0.916);
+    }
+  }
+}
+.restartBtn{
+  position: absolute;
+  left: 50%;
+  top: 70%;
+  translate: -50% -50%;
+  width: auto;
+}
+
+
+@media (max-width: 767px) {
+  body {
+    font-size: 14px;
+  }
+  li {
+    padding: 2px;
+    width: 11%;
+    height: 4vh;
+    font-size: small;
+  }
+}
+
+
+@media (max-width: 800px) {
+  .showBar {
+    display: none;
+  }
+  .menu-button {
+    display: block;
+  }
+}
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <p>
+            Yasal Garba Abdullahi
+        </p>
+    </header>
+    <hr><br>
+    <ul>
+        <li class="home">Home</li>
+        <li class="showBar">Contact</li>
+        <li class="showBar">About Us</li>
+        <li class="showBar">Log In</li>
+        <li class="showBar">Sign In</li>
+        <li class="menu-button" onclick="showSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg"
+                    height="26px" viewBox="0 -960 960 960" width="26px" fill="#e3e3e3">
+                    <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+                </svg></a></li>
+
+    </ul>
+    <ul class="side-Bar">
+        <li onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                    viewBox="0 -960 960 960" width="24px" fill="#000000">
+                    <path
+                        d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                </svg></a></li>
+        <li class="hideSidebar">Contact</li>
+        <li class="hideSidebar">About Us</li>
+        <li class="hideSidebar">Log In</li>
+        <li class="hideSidebar">Sign In</li>
+    </ul>
+
+    <hr>
+    <div class="quiz-container" id="quiz-container">
+        <h2>End of 3<sup>rd</sup> Term Quiz</h2>
+        <hr>
+        <div class="main-container" id="main-container">
+            <h3 id="question-text">
+            </h3>
+            <div class="options-container" id="options-container">
+                <button class="btn" id="answer-buttons"></button>
+                <button class="btn" id="answer-buttons"></button>
+                <button class="btn" id="answer-buttons"></button>
+                <button class="btn" id="answer-buttons"></button>
+            </div>
+            <button class="NxtBtn" id="next-btn">Next</button>
+
+        </div>
+        <div class="scoreArea" id="score-area"> </div>
+        <button id="restart-btn" class="restartBtn" onclick="startQuiz()">Restart</button>
+
+    </div>
+    <script>
+        const questions = [
+  {
+    question:
+      "A number that can only be divided by one and it's self. Called_______",
+    answers: [
+      { text: "Index", correct: false },
+      { text: "Factor", correct: false },
+      { text: "Whole", correct: false },
+      { text: "Prime", correct: true },
+    ],
+  },
+  {
+    question: "The sum of 3 days, 2 days, and 48 hours give ______ Week?",
+    answers: [
+      { text: "1 week", correct: true },
+      { text: "2 weeks", correct: false },
+      { text: "3 weeks", correct: false },
+      { text: "4 weeks", correct: false },
+    ],
+  },
+  {
+    question: "The sum of  2/5  and 8/5 is equal to_______",
+    answers: [
+      { text: "2", correct: true },
+      { text: "3", correct: false },
+      { text: "5", correct: false },
+      { text: "10", correct: false },
+    ],
+  },
+  {
+    question:
+      "Numbers that can divide any given number without remainder are called...",
+    answers: [
+      { text: "Prime", correct: false },
+      { text: "Odd", correct: false },
+      { text: "Factor", correct: true },
+      { text: "Even", correct: false },
+    ],
+  },
+  {
+    question: "Express 1/2  as Percentage",
+    answers: [
+      { text: "50%", correct: true },
+      { text: "30%", correct: false },
+      { text: "10%", correct: false },
+      { text: "25%", correct: false },
+    ],
+  },
+  {
+    question: "The value of 0 in 104,529 is _________",
+    answers: [
+      { text: "Million%", correct: false },
+      { text: "Ten Thousand", correct: true },
+      { text: "Hundred Thousand", correct: false },
+      { text: "Thousand", correct: false },
+    ],
+  },
+  {
+    question: "Which of the following is not equivalent to  1/2",
+    answers: [
+      { text: "20/40", correct: false},
+      { text: "5/10", correct: false },
+      { text: "5/15", correct: true },
+      { text: "7/14", correct: false },
+    ],
+  },
+  {
+    question: "Gramme is the basic unit of _______",
+    answers: [
+      { text: "Capacity", correct: false },
+      { text: "Mass", correct: true },
+      { text: "Time", correct: false },
+      { text: "Length", correct: false },
+    ],
+  },
+  {
+    question: "9km is equivalent to _______ In meter",
+    answers: [
+      { text: "900m", correct: false },
+      { text: "90m", correct: false },
+      { text: "0.009m", correct: false },
+      { text: "9000m", correct: true },
+    ],
+  },
+  {
+    question: "How many minutes make 10 hours",
+    answers: [
+      { text: "0.6 minutes", correct: false },
+      { text: "600 minutes", correct: true },
+      { text: "60 minutes", correct: false },
+      { text: "6,000 minutes", correct: false },
+    ],
+  },
+];
+
+const Ques1Image = document.getElementById("Qst1");
+const questionText = document.getElementById("question-text");
+const answerButtonsContainer = document.getElementById("options-container");
+const button = document.getElementById("answer-buttons");
+const nextButton = document.getElementById("next-btn");
+const scoreArea = document.getElementById("score-area");
+const restartButton = document.getElementById("restart-btn");
+const mainContainer = document.getElementById("main-container");
+
+// Quiz state
+let currentQuestionIndex = 0;
+let score = 0;
+
+// Function to start the quiz
+function startQuiz() {
+  currentQuestionIndex = 0;
+  score = 0;
+  nextButton.style.display = "none";
+  restartButton.style.display = "none";
+  scoreArea.style.display = "none";
+  questionText.style.display = "block";
+  answerButtonsContainer.style.display = "grid";
+  showQuestion();
+}
+
+// Function to display the current question
+function showQuestion() {
+  // Clear previous buttons
+  while (answerButtonsContainer.firstChild) {
+    answerButtonsContainer.removeChild(answerButtonsContainer.firstChild);
+  }
+
+  let currentQuestion = questions[currentQuestionIndex];
+  let questionNo = currentQuestionIndex + 1;
+  questionText.textContent = `${questionNo}. ${currentQuestion.question}`;
+
+  currentQuestion.answers.forEach((answer) => {
+    const button = document.createElement("button");
+    button.textContent = answer.text;
+    button.classList.add("btn");
+    answerButtonsContainer.appendChild(button);
+
+    if (answer.correct) {
+      button.dataset.correct = answer.correct;
+    }
+
+    button.addEventListener("click", selectAnswer);
+  });
+}
+
+// Function to handle answer selection
+function selectAnswer(e) {
+  const selectedBtn = e.target;
+  const isCorrect = selectedBtn.dataset.correct === "true";
+
+  // Disable all buttons
+  Array.from(answerButtonsContainer.children).forEach((button) => {
+    if (button.dataset.correct === "true") {
+      button.classList.add("correct");
+    }
+    button.disabled = true;
+  });
+
+  // Update score and highlight selected button
+  if (isCorrect) {
+    score++;
+    selectedBtn.classList.add("correct");
+  } else {
+    selectedBtn.classList.add("incorrect");
+  }
+
+  // Show the next button
+  nextButton.style.display = "block";
+  i;
+}
+
+// Function to handle the next button click
+function handleNextButton() {
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    nextButton.style.display = "none";
+    showQuestion();
+  } else {
+    showScore();
+  }
+}
+
+// Function to display the final score
+function showScore() {
+  questionText.style.display = "none";
+  answerButtonsContainer.style.display = "none";
+  nextButton.style.display = "none";
+  scoreArea.textContent = `You scored ${score} out of ${questions.length}!`;
+  scoreArea.style.display = "block";
+  restartButton.style.display = "block";
+}
+
+// Event listeners for control buttons
+nextButton.addEventListener("click", handleNextButton);
+// restartButton.addEventListener("click", startQuiz);
+
+// Start the quiz when the page loads
+startQuiz();
+function showSidebar() {
+  const showNav = document.querySelector(".side-Bar");
+  showNav.style.display = "flex";
+}
+
+function hideSidebar() {
+  const hideNav = document.querySelector(".side-Bar");
+  hideNav.style.display = "none";
+}
+
+    </script>
+</body>
+
+</html>

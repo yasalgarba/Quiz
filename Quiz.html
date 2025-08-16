@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="Quiz.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+</head>
+
+<body>
+    <header>
+        <p>
+            Yasal Garba Abdullahi
+        </p>
+    </header>
+    <hr><br>
+    <ul>
+        <li class="home">Home</li>
+        <li class="showBar">Contact</li>
+        <li class="showBar">About Us</li>
+        <li class="showBar">Log In</li>
+        <li class="showBar">Sign In</li>
+        <li class="menu-button" onclick="showSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg"
+                    height="26px" viewBox="0 -960 960 960" width="26px" fill="#e3e3e3">
+                    <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+                </svg></a></li>
+
+    </ul>
+    <ul class="side-Bar">
+        <li onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                    viewBox="0 -960 960 960" width="24px" fill="#000000">
+                    <path
+                        d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                </svg></a></li>
+        <li class="hideSidebar">Contact</li>
+        <li class="hideSidebar">About Us</li>
+        <li class="hideSidebar">Log In</li>
+        <li class="hideSidebar">Sign In</li>
+    </ul>
+
+    <hr>
+    <div class="quiz-container" id="quiz-container">
+        <h2>End of 3<sup>rd</sup> Term Quiz</h2>
+        <hr>
+        <div class="main-container" id="main-container">
+            <h3 id="question-text">
+            </h3>
+            <div class="options-container" id="options-container">
+                <button class="btn" id="answer-buttons"></button>
+                <button class="btn" id="answer-buttons"></button>
+                <button class="btn" id="answer-buttons"></button>
+                <button class="btn" id="answer-buttons"></button>
+            </div>
+            <button class="NxtBtn" id="next-btn">Next</button>
+
+        </div>
+        <div class="scoreArea" id="score-area"> </div>
+        <button id="restart-btn" class="restartBtn" onclick="startQuiz()">Restart</button>
+
+    </div>
+    <script src="Quiz.js"></script>
+</body>
+
+</html>
